@@ -48,10 +48,17 @@ function App() {
       <img src={user.photoURL} alt="" />
       <h2>Name: {user.displayName}</h2>
       <h2>E-mail: {user.email}</h2>
-      <button onClick={GoogleSingIn}>Google Sing In</button>
-      <button onClick={githubSingIn}>Github Sing In</button>
-      <br />
-      <button onClick={handleSingOut}>Sing Out</button>
+      {user.displayName ?
+        <>
+          <br />
+          <button onClick={handleSingOut}>Sing Out</button>
+        </> :
+        <>
+          <button onClick={GoogleSingIn}>Google Sing In</button>
+          <button onClick={githubSingIn}>Github Sing In</button>
+        </>
+      }
+
     </div>
   );
 }
