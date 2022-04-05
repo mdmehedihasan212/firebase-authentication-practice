@@ -1,5 +1,5 @@
 import './App.css';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import app from './firebase.init';
 import { useState } from 'react';
 
@@ -17,18 +17,30 @@ function App() {
       })
       .catch((error) => {
         console.error(error);
-      }
-      )
+      })
   };
+
+  const handleSingOut = () => {
+    signOut(auth)
+      .then(() => {
+        setUser({})
+      })
+      .catch((error) => {
+        setUser({})
+      });
+  };
+
   return (
     <div className="App">
       <h1>Firebase Authentication Learning</h1>
       <>
-        <div className="user-container">
+        <div>
+          <img style={{ 'width': '100px' }} src={user.photoURL} alt="" />
           <h4>Name: {user.displayName}</h4>
           <p>E-mail: {user.email}</p>
         </div>
         <button onClick={GoogleSingIn}>Google Sing In</button>
+        <button onClick={handleSingOut}>Sing Out</button>
       </>
     </div>
   );
